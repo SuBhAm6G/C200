@@ -1,4 +1,4 @@
-# 🐍 C Questions Collection
+# ©️💻 C Questions Collection
 
 <div align="center">
   <h1 style="font-size: 3em; color: #4CAF50;">✨ C Programming Questions ✨</h1>
