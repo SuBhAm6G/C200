@@ -1,4 +1,4 @@
-// Write a Function to calculate power of a given number suppose pow(a,b)=a^b
+// Write a Function to calculate power of a given number suppose power(a,b)=a^b
 #include <stdio.h>
 #include <stdlib.h>
 
