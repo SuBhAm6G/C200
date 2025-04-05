@@ -1,29 +1,39 @@
+// You need to implement a function that sorts an array of integers using the merge sort algorithm. 
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 20
 
-// Function to print the array
-void printArray(int arr[], int len) {
-    for (int i = 0; i < len; i++) {
-        printf("%d ", arr[i]);
+void InputArray(int *arr, int len){
+    for (int i = 0; i < len; i++)
+    {
+        scanf("%d", &arr[i]);
     }
-    printf("\n");
+    
 }
 
-// Merge function to merge two sorted halves and count inversions
-void merge(int arr[], int low, int mid, int high, int* inversions) {
-    int temp[high+1];
-    int i=low, j=mid+1, k=0;
+void PrintArray(int *arr, int len){
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    
+}
+
+
+void Merge(int arr[], int low, int mid, int high){
+    int i=low, j=mid+1, k=0, temp[high+1];
     while (i<=mid && j<=high)
     {
         if (arr[i]<arr[j])
         {
             temp[k++]=arr[i++];
         }
-        else{
+        if (arr[i]>arr[j])
+        {
             temp[k++]=arr[j++];
-            (*inversions)++;
         }
     }
+
     while (i<=mid)
     {
         temp[k++]=arr[i++];
@@ -32,36 +42,41 @@ void merge(int arr[], int low, int mid, int high, int* inversions) {
     {
         temp[k++]=arr[j++];
     }
-    for (int i = low, k=0 ; i <= high; i++,k++)
+    for (int i = low, k=0; i <= high; i++,k++)
     {
         arr[i]=temp[k];
     }
+    
 }
 
-
-// Merge Sort function
-void mergeSort(int arr[], int low, int high, int* inversions) {
-    if (low < high) {
-        int mid = low + (high - low) / 2;
-        mergeSort(arr, low, mid, inversions);
-        mergeSort(arr, mid + 1, high, inversions);
-        merge(arr, low, mid, high, inversions);
+void MergeSort(int arr[], int low, int high){
+    if (low<high)
+    {
+        int mid;
+        mid=(low+high)/2;
+        MergeSort(arr, low, mid);
+        MergeSort(arr,mid+1,high);
+        Merge(arr, low, mid, high);
     }
+    
 }
-
 int main() {
-    int arr[] = {34, 78, 12, 45, 67, 23, 11, 56};
-    int arr_size = sizeof(arr) / sizeof(arr[0]);// (8*4)/4
-    int inversions = 0;
+    int n;
+    printf("Input number of elements = ");
+    scanf("%d", &n);
+    int *arr=(int*)malloc(n*sizeof(int));
+    if (arr==NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+    printf("Enter the elements of array separated by a space \n");
+    InputArray(arr,n);
+    MergeSort(arr, 0, n-1);
+    printf("The Sorted Array is \n");
+    PrintArray(arr, n);
 
-    printf("Given array is: \n");
-    printArray(arr, arr_size);
-
-    mergeSort(arr, 0, arr_size - 1, &inversions);
-
-    printf("\nSorted array is: \n");
-    printArray(arr, arr_size);
-    printf("Inversions: %d\n", inversions);
+    free(arr);
 
     return 0;
 }
