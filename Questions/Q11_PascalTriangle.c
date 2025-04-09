@@ -1,41 +1,40 @@
-//Print a pascal triangle using c using this formula; triangle[line][j] = triangle[line - 1][j - 1] + triangle[line - 1][j]
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 50
+void Pascal(int n){
+    int line;
+    int triangle[MAX][MAX];
+    for (int line = 0; line <= n; line++)
+    {
+        //Initialising end values
+        triangle[line][0]=1;
+        triangle[line][line]=1;
 
-void Pascal(int n) {
-    int triangle[n][n];
-
-    // Generate Pascal's Triangle
-    for (int line = 0; line < n; line++) {
-        // End values of a line are always 1
-        triangle[line][0] = 1;
-        triangle[line][line] = 1;
-
-        // Calculate other values in the line
-        for (int j = 1; j < line; j++) {
-            triangle[line][j] = triangle[line - 1][j - 1] + triangle[line - 1][j];
+        for (int j = 1; j <= line; j++)
+        {
+            triangle[line][j]=triangle[line-1][j-1]+triangle[line-1][j];
         }
+        
     }
-
-    // Print Pascal's Triangle
-    for (int i = 0; i < n; i++) {
-        // Print spaces for alignment
-        for (int space = 0; space < n - i - 1; space++) {
+    
+    for (int line = 0; line < n; line++)
+    {
+        for (int space = 0; space < n - line - 1; space++) {
             printf(" ");
         }
+        
 
-        // Print values in the current line
-        for (int j = 0; j <= i; j++) {
-            printf("%d ", triangle[i][j]);
+        for (int j = 0; j <= line; j++)
+        {
+            printf("%d ", triangle[line][j]);
         }
         printf("\n");
+        
     }
+    
 }
 
 int main() {
-    int n;
-    printf("Enter the number of rows for Pascal's Triangle: ");
-    scanf("%d", &n);
-    Pascal(n);
+    Pascal(6);
     return 0;
 }
