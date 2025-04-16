@@ -51,7 +51,7 @@ int main() {
             
         }
     }
-    fseek(fp,0,SEEK_SET);
+    fseek(fp,0,SEEK_SET);//to set pointer at start of file
     char word_check[20];
     while (fscanf(fp, "%s", word_check)!=EOF)
     {
